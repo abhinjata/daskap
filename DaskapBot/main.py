@@ -4,14 +4,15 @@ import asyncio
 from dotenv import load_dotenv
 import os
 from typing import Final
+import json
 
 load_dotenv()
 TOKEN: Final[str] = os.getenv('DISCORD_TOKEN')
 
-intents = discord.Intents.default()
-intents.messages = True
-intents.guilds = True
+intents = discord.Intents.default()  
 intents.message_content = True  
+intents.members = True  
+intents.presences = True  
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
@@ -20,10 +21,26 @@ questions = [
     "What improvements would you suggest?",
     "How active are you in events? (Rarely, Sometimes, Often)",
     "On a scale of 1-10, how would you rate this community?",
-    "What are your future ambitions from this community?"
+    "What are your future ambitions from this community?",
+    "how was your day"
 ]
 
+FEEDBACK_FILE = "feedback.json"
 user_sessions = {}
+
+def load_feedback():
+    try:
+        with open(FEEDBACK_FILE, "r") as f:
+            return json.load(f)
+        
+    except(FileNotFoundError, json.JSONDecodeError):
+        return {}
+    
+def save_feedback(data):
+    with open(FEEDBACK_FILE, "w") as f:
+        json.dump(data, f, indent=4)
+        
+feedback_data = load_feedback()
 
 @bot.event
 async def on_ready():
@@ -54,13 +71,20 @@ async def on_message(message):
     #if the session is complete - extreme clause
     if current_index >= len(questions):
 
-        await user.send("You've already completed the feedback session. Thanks!")
+        await user.send("You've completed the feedback session. Thanks!")
         return
 
     #store the user response
     if current_index > 0:  #extreme clause
 
         session["responses"][questions[current_index - 1]] = message.content
+
+        feedback_data = load_feedback()
+        feedback_data[str(user_id)] = {
+            "username" : str(user), 
+            "responses" : session["responses"]
+        }
+        save_feedback(feedback_data)
 
     #next ques
     if current_index < len(questions):
@@ -71,6 +95,15 @@ async def on_message(message):
 
     else:
         #session completion condition
+        session["responses"][questions[current_index - 1]] = message.content
+
+        feedback_data = load_feedback()
+        feedback_data[str(user_id)] = {
+            "username" : str(user), 
+            "responses" : session["responses"]
+        }
+        save_feedback(feedback_data)
+        
         feedback_summary = "\n".join([f"**{q}**\n{a}" for q, a in session['responses'].items()])
 
         await user.send(f"Thanks for your feedback! Here's what you said:\n\n{feedback_summary}")
@@ -96,5 +129,14 @@ async def send_reminders():
                 if user:
                     await user.send("Hey! You haven't finished your feedback session. Feel free to continue where you left off!")
 
-# Run the bot
+'''@bot.command(name = "view_feedback")
+@commands.has_permissions(adminstrator = True)
+
+async def view_feedback(ctx):
+    if not feedback_data:
+        await ctx.send("No feedback has been collected yet.")
+        return'''
+
+
+#run the bot
 bot.run(TOKEN)
