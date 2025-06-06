@@ -1,3 +1,3 @@
 # Daskap
 
-Daskap is a bot made to give equal consideration, identity and say to the people of any given community through a persona building algorithm made with RAG (Retrieval Augmented Generation)
+A community helper bot, powered by Groq AI, LangChain & LangGraph RAG (Retrieval Augemented Generation) Framework, designed to help a select club/community's Organising Committee understand and serve the people of the club better.
