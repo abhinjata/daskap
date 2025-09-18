@@ -32,7 +32,7 @@ Communities don’t collapse because people stop caring — they collapse becaus
 
 ```
 Daskap/                # root
-├─ DaskapBot/           # main python package (agentic logic)
+├─ DaskapBot/           # main python package (agentic logic), the chain framework was a prototype the graph framework is the latest one 
 ├─ README.md            # this file
 ├─ requirements.txt     # dependencies (to be refined)
 └─ user_feedback.csv    # sample feedback data (if provided)
