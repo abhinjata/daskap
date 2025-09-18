@@ -10,7 +10,7 @@ Communities don’t collapse because people stop caring — they collapse becaus
 
 ---
 
-## Core ideas
+## Theory
 
 * **Retrieval-Augmented Scoring (RAS):** Ingest messy, scattered feedback and score it for relevance, novelty, and emotional intensity.
 * **Emotionally Intelligent Modeling:** Detect underlying emotions and synthesize responses that acknowledge and respect them.
@@ -19,7 +19,7 @@ Communities don’t collapse because people stop caring — they collapse becaus
 
 ---
 
-## Tech under the hood
+## Details
 
 * **Models:** llama-3.3-70b-versatile, but am planning to train a Qwen Model (7B, 14B, optionally 32B/72B) for emotional intelligence and nuanced reasoning.
 * **Retriever:** Chroma (vector DB) for feedback storage and retrieval.
