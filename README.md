@@ -87,7 +87,7 @@ python -m DaskapBot.main
 
 ---
 
-## Example output format
+## Example output 
 
 Generated Persona:
  **Persona Name:** Ethan Thompson
