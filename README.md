@@ -134,4 +134,4 @@ TBD (MIT or similar).
 
 **Daskap** — giving communities the tools to truly hear themselves. 
 
-(If this README.md looks ever so slighty corporate or product oriented, it's because I'm using this for an entrepreneurship course's idea. I'd hate this commodifiy this, it's just a cool tool for people to get a voice and for my introverted a** to hear more people without selling all my social energy.)
+(If this README.md looks ever so slighty corporate or product oriented, it's because I'm using this for an entrepreneurship course's idea. I'd hate to commodifiy this, it's just a cool tool for people to get a voice and for my introverted a** to hear more people without selling all my social energy.)
